@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#FBFB13"
+        >
+    <TextView android:id="@+id/time"
+              android:layout_alignParentTop="true"
+              android:layout_alignParentLeft="true"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="#000000"
+              android:text="Time: 0" />
+
+    <com.luklar9.assignment4.Panel
+            android:id="@+id/SurfaceView01"
+            android:layout_below="@id/time"
+            android:layout_alignParentBottom="true"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+    </com.luklar9.assignment4.Panel>
+</RelativeLayout>
+

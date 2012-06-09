@@ -4,13 +4,26 @@
           android:versionCode="1"
           android:versionName="1.0">
     <uses-sdk android:minSdkVersion="8"/>
-    <application android:label="@string/app_name">
+    <application android:label="Evolutionist">
         <activity android:name="StartMenu"
-                  android:label="@string/app_name">
+                  android:label="Evolutionist"
+                  android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+                  android:screenOrientation="portrait"
+                >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity android:name=".Game"
+                  android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+                  android:screenOrientation="portrait"
+                >
+        </activity>
+        <activity android:name=".EndMenu"
+                  android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+                  android:screenOrientation="portrait"
+                >
         </activity>
     </application>
 </manifest> 
