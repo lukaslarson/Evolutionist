@@ -3,9 +3,9 @@ package com.luklar9.assignment4;
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
-public class CanvasThread extends Thread {
+class CanvasThread extends Thread {
     private static SurfaceHolder surfaceholder;
-    private Panel panel;
+    private final Panel panel;
     private boolean _run = false;
     private static boolean running = false;
 
@@ -21,12 +21,7 @@ public class CanvasThread extends Thread {
     // starts/stops drawing
     public static void pause() {
         synchronized (surfaceholder) {
-            if (running)  {
-                running = false;
-            }
-            else {
-                running = true;
-            }
+            running = !running;
         }}
 
     // only starts drawing

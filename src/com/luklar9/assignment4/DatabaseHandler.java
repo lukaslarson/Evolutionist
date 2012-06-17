@@ -9,19 +9,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: lukas
- * Date: 6/7/12
- * Time: 2:12 PM
- * To change this template use File | Settings | File Templates.
- */
-public class DatabaseHandler extends SQLiteOpenHelper {
+class DatabaseHandler extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "highScoreList";
     private static final String TABLE_HIGHSCORES = "highScores";
-
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
     private static final String KEY_SCORE = "score";
@@ -48,28 +40,27 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, h.getName());
         values.put(KEY_SCORE, h.getScore());
-
         db.insert(TABLE_HIGHSCORES, null, values);
         db.close();
     }
 
-    HighScore getHighScore (int i) {
+    /* not used
+    HighScore getHighScore(int i) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor c = db.query(
                 TABLE_HIGHSCORES,
-                new String[] { KEY_ID, KEY_NAME, KEY_SCORE },
-                KEY_ID + "=?", new String[] { String.valueOf(i)},
+                new String[]{KEY_ID, KEY_NAME, KEY_SCORE},
+                KEY_ID + "=?", new String[]{String.valueOf(i)},
                 null, null, null, null);
 
         if (c != null) {
             c.moveToFirst();
         }
+        return new HighScore(Integer.parseInt(c.getString(0)), c.getString(1), c.getInt(2));
+    } */
 
-        HighScore h = new HighScore(Integer.parseInt(c.getString(0)), c.getString(1), c.getInt(2));
-        return h;
-    }
-
+    /* not used
     public List<HighScore> getAllHighScores() {
         List<HighScore> highScoreList = new ArrayList<HighScore>();
 
@@ -90,7 +81,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
         return highScoreList;
 
-    }
+    }*/
 
     public List<HighScore> getSortedHighScores() {
         List<HighScore> highScoreList = new ArrayList<HighScore>();
@@ -114,6 +105,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
+    /* not used
     public int updateHighScore(HighScore h) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -123,22 +115,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         return db.update(TABLE_HIGHSCORES, values,
                 KEY_ID + " = ?",
-                new String[] { String.valueOf( h.getId() ) } );
+                new String[]{String.valueOf(h.getId())});
 
-    }
+    } */
 
+    /* not used
     public void deleteHighScore(HighScore h) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_HIGHSCORES, KEY_ID + " = ?",
-                new String[] { String.valueOf(h.getId() ) } );
+                new String[]{String.valueOf(h.getId())});
         db.close();
-    }
+    } */
 
+    /* not used
     public int getHighScoreCount() {
         String countQuery = "SELECT * FROM " + TABLE_HIGHSCORES;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(countQuery, null);
         return c.getCount();
-    }
+    } */
 
 }

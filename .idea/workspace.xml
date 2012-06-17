@@ -16,7 +16,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="71d3499a-0366-49ab-8d5a-a6cb6eea5f42" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/raw/draw.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/raw/merge.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/raw/pow.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/raw/winning.wav" />
+      <change type="DELETED" beforePath="C:\Users\Chokis\Evolutionist\src\com\luklar9\assignment4\finals.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/com/luklar9/assignment4/R.java" afterPath="$PROJECT_DIR$/gen/com/luklar9/assignment4/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/highscore.xml" afterPath="$PROJECT_DIR$/res/layout/highscore.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/menu.xml" afterPath="$PROJECT_DIR$/res/layout/menu.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/luklar9/assignment4/CanvasThread.java" afterPath="$PROJECT_DIR$/src/com/luklar9/assignment4/CanvasThread.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/luklar9/assignment4/DatabaseHandler.java" afterPath="$PROJECT_DIR$/src/com/luklar9/assignment4/DatabaseHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/luklar9/assignment4/EndMenu.java" afterPath="$PROJECT_DIR$/src/com/luklar9/assignment4/EndMenu.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/luklar9/assignment4/Game.java" afterPath="$PROJECT_DIR$/src/com/luklar9/assignment4/Game.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/luklar9/assignment4/HighScore.java" afterPath="$PROJECT_DIR$/src/com/luklar9/assignment4/HighScore.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/luklar9/assignment4/Panel.java" afterPath="$PROJECT_DIR$/src/com/luklar9/assignment4/Panel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/luklar9/assignment4/StartMenu.java" afterPath="$PROJECT_DIR$/src/com/luklar9/assignment4/StartMenu.java" />
     </list>
     <ignored path="Evolutionist.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -74,37 +89,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Game.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/luklar9/assignment4/Game.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="0" selection-start="1781" selection-end="1781" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="game.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/game.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="47" selection-start="765" selection-end="765" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="highscore.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/highscore.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="38" selection-start="2935" selection-end="2935" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StartMenu.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/luklar9/assignment4/StartMenu.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="0" selection-start="907" selection-end="907" vertical-scroll-proportion="0.0">
+            <state line="1" column="1" selection-start="40" selection-end="40" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -113,7 +101,19 @@
       <file leaf-file-name="Panel.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/luklar9/assignment4/Panel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="99" column="33" selection-start="3050" selection-end="3050" vertical-scroll-proportion="0.015274949">
+            <state line="472" column="83" selection-start="15323" selection-end="15323" vertical-scroll-proportion="0.6703741">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#589#596#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StartMenu.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/luklar9/assignment4/StartMenu.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="24" selection-start="0" selection-end="1859" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -122,16 +122,7 @@
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="54" selection-start="1155" selection-end="1155" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HighScore.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/luklar9/assignment4/HighScore.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="0" selection-start="547" selection-end="547" vertical-scroll-proportion="0.0">
+            <state line="6" column="25" selection-start="290" selection-end="290" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -140,7 +131,16 @@
       <file leaf-file-name="CanvasThread.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/luklar9/assignment4/CanvasThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="7" selection-start="915" selection-end="915" vertical-scroll-proportion="0.0">
+            <state line="10" column="59" selection-start="0" selection-end="1396" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DatabaseHandler.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/luklar9/assignment4/DatabaseHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="75" selection-start="0" selection-end="4402" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -149,16 +149,25 @@
       <file leaf-file-name="EndMenu.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/luklar9/assignment4/EndMenu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="48" selection-start="2072" selection-end="2072" vertical-scroll-proportion="0.0">
+            <state line="34" column="62" selection-start="0" selection-end="1923" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="finals.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/luklar9/assignment4/finals.java">
+      <file leaf-file-name="Game.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/luklar9/assignment4/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="18" selection-start="117" selection-end="117" vertical-scroll-proportion="0.0">
+            <state line="41" column="118" selection-start="0" selection-end="1865" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HighScore.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/luklar9/assignment4/HighScore.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="128" selection-start="0" selection-end="691" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -179,22 +188,25 @@
       <list>
         <option value="$PROJECT_DIR$/res/layout/startMenu.xml" />
         <option value="$PROJECT_DIR$/res/layout/highScore.xml" />
-        <option value="$PROJECT_DIR$/src/com/luklar9/assignment4/HighScore.java" />
-        <option value="$PROJECT_DIR$/src/com/luklar9/assignment4/DatabaseHandler.java" />
         <option value="$PROJECT_DIR$/src/com/luklar9/assignment4/finals.java" />
         <option value="$PROJECT_DIR$/res/layout/game.xml" />
+        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/res/layout/menu.xml" />
+        <option value="$PROJECT_DIR$/res/layout/highscore.xml" />
+        <option value="$PROJECT_DIR$/src/com/luklar9/assignment4/CanvasThread.java" />
+        <option value="$PROJECT_DIR$/src/com/luklar9/assignment4/DatabaseHandler.java" />
         <option value="$PROJECT_DIR$/src/com/luklar9/assignment4/EndMenu.java" />
         <option value="$PROJECT_DIR$/src/com/luklar9/assignment4/Game.java" />
-        <option value="$PROJECT_DIR$/src/com/luklar9/assignment4/CanvasThread.java" />
-        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/src/com/luklar9/assignment4/HighScore.java" />
         <option value="$PROJECT_DIR$/src/com/luklar9/assignment4/StartMenu.java" />
-        <option value="$PROJECT_DIR$/res/layout/highscore.xml" />
         <option value="$PROJECT_DIR$/src/com/luklar9/assignment4/Panel.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1920" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
     <option name="height" value="1176" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -223,30 +235,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Evolutionist" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Evolutionist" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -283,36 +271,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
           <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Evolutionist" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Evolutionist" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane">
+        <subPane>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="Evolutionist" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Evolutionist" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -331,6 +311,11 @@
     <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Chokis\Evolutionist\res\raw" />
+    </key>
   </component>
   <component name="RunManager" selected="Android Application.Evolutionist">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -533,7 +518,7 @@
     <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
     <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
     <option name="FORCE_UPDATE" value="false" />
-    <configuration useDefault="true">$USER_HOME$/.subversion_IDEA</configuration>
+    <configuration useDefault="true">C:\Users\Chokis\AppData\Roaming\Subversion</configuration>
     <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
   </component>
   <component name="TaskManager">
@@ -550,7 +535,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1176" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -561,21 +546,21 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32944608" sideWeight="0.24669604" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32847425" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32750243" sideWeight="0.74559474" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22145669" sideWeight="0.74559474" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32743838" sideWeight="0.6724976" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32750243" sideWeight="0.4955947" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32977018" sideWeight="0.6732283" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32677165" sideWeight="0.4955947" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32743838" sideWeight="0.6724976" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3270978" sideWeight="0.6732283" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297244" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3277559" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20310982" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3996063" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -638,80 +623,70 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/android-sdks/platforms/android-8/android.jar!/android/os/Handler.class">
+    <entry file="file://$PROJECT_DIR$/res/layout/highscore.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="0" selection-start="3426" selection-end="3426" vertical-scroll-proportion="0.0" />
+        <state line="8" column="38" selection-start="448" selection-end="448" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/menu.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="65" selection-start="639" selection-end="639" vertical-scroll-proportion="0.0" />
+        <state line="28" column="14" selection-start="1203" selection-end="1203" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/luklar9/assignment4/DatabaseHandler.java">
+    <entry file="file://$PROJECT_DIR$/build.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="38" selection-start="1682" selection-end="1682" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/android-sdks/platforms/android-8/android.jar!/android/view/SurfaceView.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="1" selection-start="1554" selection-end="1554" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/android-sdks/platforms/android-8/android.jar!/java/util/ArrayList.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="0" selection-start="2130" selection-end="2130" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/luklar9/assignment4/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="0" selection-start="1781" selection-end="1781" vertical-scroll-proportion="0.0" />
+        <state line="1" column="38" selection-start="77" selection-end="77" vertical-scroll-proportion="0.026771653" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/game.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="47" selection-start="765" selection-end="765" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/highscore.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="38" selection-start="2935" selection-end="2935" vertical-scroll-proportion="0.0" />
+        <state line="1" column="1" selection-start="40" selection-end="40" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/luklar9/assignment4/StartMenu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="0" selection-start="907" selection-end="907" vertical-scroll-proportion="0.0" />
+        <state line="18" column="24" selection-start="0" selection-end="1859" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="54" selection-start="1155" selection-end="1155" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/luklar9/assignment4/HighScore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="0" selection-start="547" selection-end="547" vertical-scroll-proportion="0.0" />
+        <state line="6" column="25" selection-start="290" selection-end="290" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/luklar9/assignment4/CanvasThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="7" selection-start="915" selection-end="915" vertical-scroll-proportion="0.0" />
+        <state line="10" column="59" selection-start="0" selection-end="1396" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/luklar9/assignment4/DatabaseHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="75" selection-start="0" selection-end="4402" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/luklar9/assignment4/EndMenu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="48" selection-start="2072" selection-end="2072" vertical-scroll-proportion="0.0" />
+        <state line="34" column="62" selection-start="0" selection-end="1923" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/luklar9/assignment4/finals.java">
+    <entry file="file://$PROJECT_DIR$/src/com/luklar9/assignment4/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="18" selection-start="117" selection-end="117" vertical-scroll-proportion="0.0" />
+        <state line="41" column="118" selection-start="0" selection-end="1865" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/luklar9/assignment4/HighScore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="128" selection-start="0" selection-end="691" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/luklar9/assignment4/Panel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="99" column="33" selection-start="3050" selection-end="3050" vertical-scroll-proportion="0.015274949">
-          <folding />
+        <state line="472" column="83" selection-start="15323" selection-end="15323" vertical-scroll-proportion="0.6703741">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#589#596#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

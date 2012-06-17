@@ -1,48 +1,35 @@
 package com.luklar9.assignment4;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.*;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.*;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Random;
+import java.util.*;
 
 public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 
-    private float touched_x = 0;
-    private float touched_y = 0;
+    // initiate things
     private float screen_x = 0;
     private float screen_y = 0;
-    private int lives = 0;
-    private int score = 0;
-    private Random random = new Random();
-    private static DisplayMetrics metrics = new DisplayMetrics();
-    //private Bitmap brickBM = BitmapFactory.decodeResource(getResources(), R.drawable.brick);
     private CanvasThread canvasthread;
     private boolean isResumed = false;
-    //private SoundManager soundManager = new SoundManager();
-    private Path mPath = new Path();
-    Canvas pCanvas;
-    private ArrayList<Point> lines = new ArrayList<Point>();
+    private final ArrayList<Point> lines = new ArrayList<Point>();
     private boolean finish = false;
-    private ArrayList<Dot> dots = new ArrayList<Dot>();
-    android.graphics.Point dpsize = new android.graphics.Point();
-    public WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-    Display display = wm.getDefaultDisplay();
+    private final ArrayList<Dot> dots = new ArrayList<Dot>();
+    private final WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+    private final Display display = wm.getDefaultDisplay();
     private long timeStart = 0;
     private long timeLast = 0;
     private long timeEqualizer = 0;
-    private long lastUpdate = 0;
-    private Paint paint;
-
-
+    private long freeTimer = 0;
+    private final Paint paint;
+    private final SoundManager soundManager = new SoundManager();
+    private int colorToMerge = 0;
 
     public Panel(Context context, AttributeSet attributeSet) {
         super(context);
@@ -59,20 +46,18 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
         screen_x = display.getWidth();
         screen_y = display.getHeight();
 
-
-
-
         // initiate the sound manager
-        /*soundManager.initSounds(getContext());
-
-        soundManager.addSound(1, R.raw.brickbounce);
-        soundManager.addSound(2, R.raw.paddlebounce);
-        soundManager.addSound(3, R.raw.wallbounce);*/
+        soundManager.initSounds(getContext());
+        soundManager.addSound(1, R.raw.draw);
+        soundManager.addSound(2, R.raw.merge);
+        soundManager.addSound(3, R.raw.pow);
+        soundManager.addSound(4, R.raw.winning);
 
         // set all values anew if the game is not resumed
         if (!isResumed) {
             startGame();
             isResumed = true;
+            timeStart = System.currentTimeMillis();
         }
 
         // check if thread is terminated and start it
@@ -86,8 +71,8 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
         }
 
 
-        timeStart = System.currentTimeMillis();
         timeLast = System.currentTimeMillis();
+        freeTimer = System.currentTimeMillis();
         CanvasThread.justStart();
 
     }
@@ -98,6 +83,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
         dots.clear();
         for (int i = 0; i < 5; i++) {
             for (int z = 0; z < 5; z++) {
+                // add them to the arraylist so they can be drawn
                 dots.add(new Dot(screen_x, screen_y, i+1, 5, true));
             }
         }
@@ -129,158 +115,90 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 
     //@Override
     public void onDraw(Canvas canvas) {
+
+        // set the timeequalizer to normalize dot movements disjointed from fps
+        // and update timeLast to prepare for creating the next timeEqualizer
         timeEqualizer = (timeLast - System.currentTimeMillis()) / 10;
         timeLast = System.currentTimeMillis();
+
         // draw everything black
         canvas.drawColor(Color.BLACK);
 
+        // draw things
         drawPath(canvas);
         drawDots(canvas);
 
-        if (((int) ((System.currentTimeMillis() - timeStart)) / 1000) > lastUpdate) {
+        // update the score if more than 1s has passed
+        if (((int) ((System.currentTimeMillis() - timeStart)) / 1000) > 0) {
             updateScore(false);
         }
-
-
     }
 
-    public void drawDots(Canvas canvas) {
-        for (int i = 0; i < dots.size(); i++) {
-            paint.setColor(dots.get(i).getColor());
-            canvas.drawCircle(dots.get(i).getX(), dots.get(i).getY(), dots.get(i).getSize(), paint);
+    void drawDots(Canvas canvas) {
+        for (Dot dot : dots) {
 
-            dots.get(i).maybeChangeDirection();
+            // draw the dot
+            paint.setColor(dot.getColor());
+            canvas.drawCircle(dot.getX(), dot.getY(), dot.getSize(), paint);
 
-            if (dots.get(i).getX() + dots.get(i).getDx() * timeEqualizer + dots.get(i).getSize()*2  > screen_x ||
-                    dots.get(i).getX() + dots.get(i).getDx() * timeEqualizer - dots.get(i).getSize() < 0) {
-                dots.get(i).setDx(dots.get(i).getDx() * -1);
+            // randomly alter dx / dy
+            dot.maybeChangeDirection();
+
+            // check for border collisions before updating the balls position
+            if (dot.getX() + dot.getDx() * timeEqualizer + dot.getSize() * 2 > screen_x ||
+                    dot.getX() + dot.getDx() * timeEqualizer - dot.getSize() < 0) {
+                dot.setDx(dot.getDx() * -1);
             }
-            if (dots.get(i).getY() + dots.get(i).getDy() * timeEqualizer + dots.get(i).getSize()*2 > screen_y - 25 ||
-                    dots.get(i).getY() + dots.get(i).getDy() * timeEqualizer - dots.get(i).getSize()*2 < 0) {
-                dots.get(i).setDy(dots.get(i).getDy() * -1);
+            if (dot.getY() + dot.getDy() * timeEqualizer + dot.getSize() * 2 > screen_y - 25 ||
+                    dot.getY() + dot.getDy() * timeEqualizer - dot.getSize() * 2 < 0) {
+                dot.setDy(dot.getDy() * -1);
             }
 
-
-            dots.get(i).setX(dots.get(i).getX() + dots.get(i).getDx() * timeEqualizer);
-            dots.get(i).setY(dots.get(i).getY() + dots.get(i).getDy() * timeEqualizer);
+            // update the position
+            dot.setX(dot.getX() + dot.getDx() * timeEqualizer);
+            dot.setY(dot.getY() + dot.getDy() * timeEqualizer);
         }
     }
 
-    public void drawPath(Canvas canvas) {
+    void drawPath(Canvas canvas) {
+
+        // recreate the path to draw
         Path path = new Path();
         boolean first = true;
-        for (int i = 0; i < lines.size(); i++) {
+
+        // put all the detected lines in it
+        for (Point line : lines) {
             if (first) {
                 first = false;
                 path.moveTo(lines.get(0).getX(), lines.get(0).getY());
             }
-            path.lineTo(lines.get(i).getX(), lines.get(i).getY());
+            path.lineTo(line.getX(), line.getY());
         }
-        if (finish) {
 
-            path.lineTo(lines.get(0).getX(), lines.get(0).getY());
+        // check for collisions on touch up
+        if (finish) {
             detectCollisions();
             finish = false;
             lines.clear();
         }
+
+        // draw it
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(2);
         paint.setColor(Color.WHITE);
         canvas.drawPath(path, paint);
     }
 
-    public void detectCollisions() {
-        int[] xes = new int[lines.size()];
-        int[] yes = new int[lines.size()];
-        for (int i = 0; i < lines.size(); i++) {
-            xes[i] =(int) lines.get(i).getX();
-        }
-        for (int i = 0; i < lines.size(); i++) {
-            yes[i] =(int) lines.get(i).getY();
-        }
 
-        int colorToMerge = 0;
-        boolean colorMatch = true;
-        Polygon polygon = new Polygon(xes, yes, lines.size());
-        for (int i = 0; i < dots.size(); i++) {
-            if (polygon.contains((int)dots.get(i).getX(),(int) dots.get(i).getY())) {
-                if (colorToMerge == 0) {
-                    colorToMerge = dots.get(i).getColor();
-                }
-                if (colorToMerge == dots.get(i).getColor()) {
-                    dots.get(i).setToMerge(true);
-                }   else { colorMatch = false; }
-            }
-
-        }
-        int merges = 0;
-        int mergedX = 0;
-        int mergedY = 0;
-        int mergedSize = 0;
-        if (colorMatch) {
-            for (int i = 0; i < dots.size(); i++) {
-
-                if (dots.get(i).isToMerge()) {
-                    merges += 1;
-                    mergedX += dots.get(i).getX();
-                    mergedY += dots.get(i).getY();
-                    mergedSize += dots.get(i).getSize();
-
-                }
-            }
-        }
-
-        if (merges > 1) {
-            Iterator<Dot> it = dots.iterator();
-            while (it.hasNext()) {
-                if (it.next().isToMerge()) {
-                    it.remove();
-                }
-            }
-            dots.add(new Dot(mergedX / merges, mergedY / merges, colorToMerge, mergedSize, false));
-        }
-        for (int i = 0; i < dots.size(); i++) {
-            dots.get(i).setToMerge(false);
-        }
-
-        // check win
-        int color = 1;
-        boolean winning = false;
-        for (int i = 1; i<6; i++) {
-            switch(i) {
-                case 1: color = Color.BLUE;
-                    break;
-                case 2: color = Color.RED;
-                    break;
-                case 3: color = Color.GREEN;
-                    break;
-                case 4: color = Color.WHITE;
-                    break;
-                case 5: color = Color.CYAN;
-                    break;
-            }
-
-            int counter = 0;
-            for (int z = 0; z < dots.size(); z++) {
-                if (dots.get(z).getColor() == color) {
-                    counter++;
-                }
-            }
-            if (counter==1) {
-                winning = true;
-            }
-        }
-        if (winning) {
-            updateScore(true);
-        }
-
-    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        
+        // get the position
         float x = event.getX();
         float y = event.getY();
-
+        
+        // differentiate between actions
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 touch_start(x, y);
@@ -298,32 +216,55 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
         return true;
     }
 
-    private float mX, mY;
-
+    // start a new line if the freetimer has been reached after a faulty draw
     private void touch_start(float x, float y) {
-        Point point = new Point(x,y);
-        lines.add(point);
+        if (System.currentTimeMillis() > freeTimer) {
+            lines.add(new Point(x,y));
+        }
     }
+    
+    // add points to the path
     private void touch_move(float x, float y) {
-        Point point = new Point(x,y);
-        lines.add(point);
-
-
+        if (System.currentTimeMillis() > freeTimer) {
+            lines.add(new Point(x,y));
+            if (detectIntersects()) {
+                lines.clear();
+                freeTimer = System.currentTimeMillis() + 1000;
+                soundManager.play(3);
+            }
+        }
     }
+    
+    // end of path, detect collisions on the way back, add the origin to the lines array
+    // also play an annoying sound if the user fails
     private void touch_up() {
-        finish = true;
+        if (System.currentTimeMillis() > freeTimer) {
+            if (lines.size() > 0) {
+                lines.add(new Point(lines.get(0).getX(), lines.get(0).getY()));
+                if (detectIntersects()) {
+                    lines.clear();
+                    soundManager.play(3);
+                } else {
+                    finish = true;
+                }
+            }
+        }
     }
 
-
-    // generate organisms upon starting
-    public void createOrganisms() {
-
+    // detect line intersecting itself
+    boolean detectIntersects() {
+        if (lines.size()>2) {
+            for (int i = 0; i < lines.size() - 1; i++) {
+                if (detectLineIntersection(lines.get(i), lines.get(i + 1), lines.get(lines.size() - 2), lines.get(lines.size() - 1))) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
-
-
 
     // updates the textviews above the surfaceview panel
-    public void updateScore(boolean end) {
+    void updateScore(boolean end) {
         Message msg = new Message();
         Bundle bundle = new Bundle();
         bundle.putInt("time", (int) ((System.currentTimeMillis() - timeStart)) / 1000);
@@ -336,8 +277,208 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
         Game.handler.sendMessage(msg);
     }
 
+    private boolean detectLineIntersection(Point start1,
+                                           Point end1, Point start2, Point end2) {
+
+        //init
+        double k1, k2, m1, m2, iY, iX;
+
+        // y = kx + m
+
+        // find k
+        k1 = (start1.y - end1.y) / (start1.x - end1.x);
+        k2 = (start2.y - end2.y) / (start2.x - end2.x);
+
+        // find m
+        // m = y - kx
+        m1 = start1.y - (k1 * start1.x);
+        m2 = start2.y - (k2 * start2.x);
+
+        // slopes are equal
+        if (k1 == k2) {
+
+            // they lines are on the same line
+            if (m1 == m2) {
+
+                // check if one end of the second line is overlapped by the first line
+                if (Math.min(start1.x, end1.x) < start2.x &&
+                        Math.max(start1.x, end1.x) > start2.x) {
+                    // first point overlapped
+                    return true;
+                }
+
+                // check the other line
+                if (Math.min(start1.x, end1.x) < end2.x &&
+                        Math.max(start1.x, end1.x) > end2.x) {
+                    // second point overlapped
+                    return true;
+                }
+            }
+
+            // the lines are simply parallel
+            return false;
+        }
+
+        // slopes are not equal, meaning they intersect somewhere
+        // find if they intersect withing the segment
+        else {
+            // find the intersecting point
+            iX = (m1 - m2) / (k2 - k1);
+            // intersection in iX gives iY
+            iY = k1*iX + m1;
+
+            // check if the first line segment overlaps the intersection point
+            if ((iX > Math.min(start1.x, end1.x) && iX < Math.max(start1.x,
+                    end1.x))
+                    && (iY > Math.min(start1.y, end1.y) && iY < Math.max(
+                    start1.y, end1.y))) {
+
+                // first segment overlaps the intersection point
+                // check the second
+                if ((iX > Math.min(start2.x, end2.x) &&
+                        iX < Math.max(start2.x, end2.x)) && (
+                        iY > Math.min(start2.y, end2.y) &&
+                        iY < Math.max(start2.y, end2.y))) {
+
+                    // both segments overlap the intersection point
+                    return true;
+                }
+            }
+
+            // both lines do not overlap the intersection point
+            return false;
+        }
+    }
+
+    void detectCollisions() {
+
+        // put all the x:s and y:s into an array
+        int[] xes = new int[lines.size()];
+        int[] yes = new int[lines.size()];
+        for (int i = 0; i < lines.size(); i++) {
+            xes[i] =(int) lines.get(i).getX();
+        }
+        for (int i = 0; i < lines.size(); i++) {
+            yes[i] =(int) lines.get(i).getY();
+        }
+
+        boolean colorMatch = true;
+
+        // check if the polygon contains more than 1 of each color but no other color
+        colorToMerge = 0;
+        for (Dot dot2 : dots) {
+
+            // check if the dots are within the polygon
+            if (detectContained((int) dot2.getX(), (int) dot2.getY(), xes, yes, lines.size())) {
+
+                //  set the color to the first color found
+                if (colorToMerge == 0) {
+                    colorToMerge = dot2.getColor();
+                }
+
+                // if any of the next colors are not the same, set colormatch to false and break
+                if (colorToMerge == dot2.getColor()) {
+                    dot2.setToMerge(true);
+                } else {
+                    colorMatch = false;
+                    break;
+                }
+            }
+        }
+
+        // set merging variables
+        int merges = 0;
+        int mergedX = 0;
+        int mergedY = 0;
+        int mergedSize = 0;
+
+        // calculate position of the new and count merges, must be >1
+        if (colorMatch) {
+            for (Dot dot : dots) {
+                if (dot.isToMerge()) {
+                    merges += 1;
+                    mergedX += dot.getX();
+                    mergedY += dot.getY();
+                    mergedSize += dot.getSize();
+                }
+            }
+        }
+
+        // more than one to merge, play a sound, remove the old dot, add a new
+        if (merges > 1) {
+            soundManager.play(2);
+            Iterator<Dot> it = dots.iterator();
+            while (it.hasNext()) {
+                if (it.next().isToMerge()) {
+                    it.remove();
+                }
+            }
+            dots.add(new Dot(mergedX / merges, mergedY / merges, colorToMerge, mergedSize, false));
+        }
+
+        // set everything back to not being merged
+        for (Dot dot1 : dots) {
+            dot1.setToMerge(false);
+        }
+
+        // check win, only 1 dot of any color
+        int color = 1;
+        boolean winning = false;
+        for (int i = 1; i<6; i++) {
+            switch(i) {
+                case 1: color = Color.BLUE;
+                    break;
+                case 2: color = Color.RED;
+                    break;
+                case 3: color = Color.GREEN;
+                    break;
+                case 4: color = Color.WHITE;
+                    break;
+                case 5: color = Color.CYAN;
+                    break;
+            }
+
+            // count every color and play a sound if winning
+            int counter = 0;
+            for (Dot dot : dots) {
+                if (dot.getColor() == color) {
+                    counter++;
+                }
+            }
+            if (counter==1) {
+                soundManager.play(4);
+                winning = true;
+            }
+        }
+
+        // update the score and end the game via the handler
+        if (winning) {
+            updateScore(true);
+        }
+    }
+
+    private boolean detectContained( int pointX, int pointY, int[] xes, int[] yes, int sides ) {
+
+        boolean side = false;
+
+        // run once for every edge of the polygon, no precheck with a larger bounding box,
+        // should be implemented if using more dots
+        for( int i = 0, j = sides -1; i < sides; j = i++ ) {
+
+            // check if point lies between two polygon edges on the y-axis
+            if ( (yes[i] < pointY && yes[j] >= pointY ) || (yes[j] < pointY && yes[i] >= pointY)) {
+
+                // check if the point horizontally intersects with polygon line on the right side
+                // points within the polygon have an odd number of point-extended line-intersecting polygon lines
+                if (xes[i] + (pointY - yes[i]) / (yes[j] - yes[i]) * (xes[j] - xes[i]) < pointX) {
+                    side = !side;
+                }
+            }
+        }
+        return side;
+    }
 }
-      /*
+
 class SoundManager {
     private SoundPool soundPool;
     private HashMap soundPoolMap;
@@ -364,11 +505,11 @@ class SoundManager {
         streamVolume = streamVolume / audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         soundPool.play((Integer) soundPoolMap.get(sound), streamVolume, streamVolume, 1, 0, 1f);
     }
-}       */
+}
 
 class Point {
-    private float x;
-    private float y;
+    public final float x;
+    public final float y;
 
     Point(float x, float y) {
         this.x = x;
@@ -392,8 +533,7 @@ class Dot {
     private float size = 5;
     private int color;
     private boolean toMerge = false;
-    Random random = new Random();
-    private float speedEqualizer = 0;
+    private final Random random = new Random();
 
     Dot(float x, float y, int c, float s, Boolean r) {
 
@@ -406,9 +546,11 @@ class Dot {
             this.x = x;
             this.y = y;
         }
-        speedEqualizer = random.nextFloat();
+
+        // make sure the dots move the same speed, size taken into account
+        float speedEqualizer = random.nextFloat();
         dx = 5 * speedEqualizer / s;
-        dy = 5 * (1-speedEqualizer) / s;
+        dy = 5 * (1- speedEqualizer) / s;
         if (random.nextBoolean()) {
             dx = dx * -1;
         }
@@ -432,14 +574,8 @@ class Dot {
         size = s;
 
     }
-    Dot(float x, float y, float size) {
 
-        dx = random.nextFloat();
-        dy = random.nextFloat();
-        this.size = size;
-        //this.color = color;
-    }
-
+    // 1% chance to change direction every draw
     public void maybeChangeDirection() {
         if (random.nextFloat() > 0.99) {
             dx = dx * -1;
@@ -498,90 +634,7 @@ class Dot {
     }
 }
 
-/**
-
- * Minimum Polygon class for Android.
-
- */
-
-class Polygon {
 
 
 
-    // Polygon coodinates.
 
-    private int[] polyY, polyX;
-
-
-
-    // Number of sides in the polygon.
-
-    private int polySides;
-
-
-
-    /**
-
-     * Default constructor.
-
-     * @param px Polygon y coods.
-
-     * @param py Polygon x coods.
-
-     * @param ps Polygon sides count.
-
-     */
-
-    public Polygon( int[] px, int[] py, int ps ) {
-
-
-
-        polyX = px;
-
-        polyY = py;
-
-        polySides = ps;
-
-    }
-
-
-
-    /**
-
-     * Checks if the Polygon contains a point.
-
-     * @see "http://alienryderflex.com/polygon/"
-
-     * @param x Point horizontal pos.
-
-     * @param y Point vertical pos.
-
-     * @return Point is in Poly flag.
-
-     */
-
-    public boolean contains( int x, int y ) {
-
-
-
-        boolean oddTransitions = false;
-
-        for( int i = 0, j = polySides -1; i < polySides; j = i++ ) {
-
-            if( ( polyY[ i ] < y && polyY[ j ] >= y ) || ( polyY[ j ] < y && polyY[ i ] >= y ) ) {
-
-                if( polyX[ i ] + ( y - polyY[ i ] ) / ( polyY[ j ] - polyY[ i ] ) * ( polyX[ j ] - polyX[ i ] ) < x ) {
-
-                    oddTransitions = !oddTransitions;
-
-                }
-
-            }
-
-        }
-
-        return oddTransitions;
-
-    }
-
-}

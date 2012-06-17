@@ -10,24 +10,21 @@ import android.os.Message;
 import android.widget.EditText;
 import android.widget.TextView;
 
-/**
- * Created with IntelliJ IDEA.
- * User: lukas
- * Date: 4/22/12
- * Time: 9:44 PM
- * To change this template use File | Settings | File Templates.
- */
 public class Game extends Activity{
 
     private static TextView timeTV;
     private static String name = "Player";
-    public static Context c;
+    private static Context c;
 
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
+
+        // start the thread
         CanvasThread.justStart();
+
+        // initiate and get name from first screen
         timeTV = (TextView) findViewById(R.id.time);
         c = getApplicationContext();
         Intent i = getIntent();
@@ -36,17 +33,21 @@ public class Game extends Activity{
         }
     }
 
-    // handler to update textviews from other thread
-    public static Handler handler = new Handler() {
+    // handler to update textviews from other thread, also ends game
+    public static final Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+
+            // update the textview
             int time = msg.getData().getInt("time");
             timeTV.setText("Time: " + time + " secs");
 
+            // if end
             if (msg.getData().getBoolean("end")) {
+
+                // create an intent and set the name and score in a bundle
                 Intent i = new Intent();
                 i.setClassName("com.luklar9.assignment4", "com.luklar9.assignment4.EndMenu");
-
                 Bundle b = new Bundle();
                 b.putString("name", name);
                 b.putInt("time", time);

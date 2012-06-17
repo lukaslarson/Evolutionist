@@ -8,23 +8,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: lukas
- * Date: 6/7/12
- * Time: 3:30 PM
- * To change this template use File | Settings | File Templates.
- */
 public class EndMenu extends Activity{
-
-    private TextView hs1;
-    private TextView hs2;
-    private TextView hs3;
-    private TextView hs4;
-    private TextView hs5;
-    private DatabaseHandler db;
-    private int highScoreCount;
-    private List<HighScore> highScoreList;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -32,18 +16,22 @@ public class EndMenu extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.highscore);
 
-        hs1 = (TextView) findViewById(R.id.hs1);
-        hs2 = (TextView) findViewById(R.id.hs2);
-        hs3 = (TextView) findViewById(R.id.hs3);
-        hs4 = (TextView) findViewById(R.id.hs4);
-        hs5 = (TextView) findViewById(R.id.hs5);
+        TextView yourScore = (TextView) findViewById(R.id.yourscore);
+        TextView hs1 = (TextView) findViewById(R.id.hs1);
+        TextView hs2 = (TextView) findViewById(R.id.hs2);
+        TextView hs3 = (TextView) findViewById(R.id.hs3);
+        TextView hs4 = (TextView) findViewById(R.id.hs4);
+        TextView hs5 = (TextView) findViewById(R.id.hs5);
 
+        // get the data from the intent
         Intent i = getIntent();
-        db = new DatabaseHandler(this);
-        db.addHighScore(new HighScore(i.getExtras().getString("name"), i.getExtras().getInt("time")));
-        highScoreList = db.getSortedHighScores();
-        Log.w("Test", "3:" + highScoreList.size());
 
+        // get the highscores
+        DatabaseHandler db = new DatabaseHandler(this);
+        db.addHighScore(new HighScore(i.getExtras().getString("name"), i.getExtras().getInt("time")));
+        List<HighScore> highScoreList = db.getSortedHighScores();
+
+        // populate the textviews
         switch (highScoreList.size()) {
             case 5: hs5.setText("5: " + highScoreList.get(4).getScore() + "s" + " - " + highScoreList.get(4).getName());
             case 4: hs4.setText("4: " + highScoreList.get(3).getScore() + "s" + " - " + highScoreList.get(3).getName());
@@ -53,9 +41,6 @@ public class EndMenu extends Activity{
                 break;
             default: break;
         }
-
-        Log.w("TEST", "4:"+highScoreList.get(0).getScore());
-
-
+        yourScore.setText("Your time: " + i.getExtras().getInt("time") + "secs");
     }
 }

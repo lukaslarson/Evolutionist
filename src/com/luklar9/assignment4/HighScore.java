@@ -1,27 +1,19 @@
 package com.luklar9.assignment4;
 
-/**
- * Created with IntelliJ IDEA.
- * User: lukas
- * Date: 6/7/12
- * Time: 1:50 PM
- * To change this template use File | Settings | File Templates.
- */
-public class HighScore {
+class HighScore {
 
     private int id;
     private String name;
     private int score;
 
-    public HighScore(){
-
-    }
+    public HighScore(){}
 
     public HighScore(String n, int s) {
         name = n;
         score = s;
     }
 
+/* not used
     public HighScore(int i, String n, int s) {
         id = i;
         name = n;
@@ -30,7 +22,7 @@ public class HighScore {
 
     public int getId(){
         return id;
-    }
+    } */
 
     public void setId(int i){
         id = i;
